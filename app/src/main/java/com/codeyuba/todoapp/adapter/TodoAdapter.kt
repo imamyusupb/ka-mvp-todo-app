@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codeyuba.todoapp.R
 import com.codeyuba.todoapp.listener.ItemClickListener
 import com.codeyuba.todoapp.model.TaskModel
 
-class TodoAdapter(var context :Context):RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
+class TodoAdapter(var context :Context,var itemClicked :ItemClickListener):RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
 
      var taskList = arrayListOf<TaskModel>()
 
@@ -35,7 +36,7 @@ class TodoAdapter(var context :Context):RecyclerView.Adapter<TodoAdapter.ViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoAdapter.ViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.list_task,parent,false)
-        return ViewHolder(itemView)
+        return ViewHolder(itemView = itemView)
     }
 
     override fun onBindViewHolder(holder: TodoAdapter.ViewHolder, position: Int) {
@@ -47,6 +48,12 @@ class TodoAdapter(var context :Context):RecyclerView.Adapter<TodoAdapter.ViewHol
 
     inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
         val edtText = itemView.findViewById<AppCompatTextView>(R.id.tv_task)
-        val btn_delete = itemView.findViewById<AppCompatTextView>(R.id.btn_delete)
+        val btn_delete = itemView.findViewById<AppCompatImageButton>(R.id.btn_delete)
+
+        init {
+            btn_delete.setOnClickListener{
+                itemClicked.clicked(adapterPosition)
+            }
+        }
     }
 }

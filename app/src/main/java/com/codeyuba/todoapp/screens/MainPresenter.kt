@@ -12,6 +12,7 @@ class MainPresenter : MainContract.Actions{
     override fun initScreen(){
         _views?.setupViews()
         _views?.setupListeners()
+        fetchAllDataFromDatabase()
     }
 
     override fun addTaskToRecyclerView() {
@@ -19,10 +20,11 @@ class MainPresenter : MainContract.Actions{
     }
 
     override fun addTaskToDatabase() {
-
+        _views?.addTaskToDatabase(_views?.getTask()!!)
     }
 
     override fun fetchAllDataFromDatabase() {
+        _views?.addTaskToRecyclerViewList(_views?.getAllTaskFromDatabase() as ArrayList)
 
     }
 }

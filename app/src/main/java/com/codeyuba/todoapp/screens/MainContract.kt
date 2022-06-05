@@ -8,9 +8,9 @@ interface MainContract {
         fun setupViews()
         fun setupListeners()
         fun getTask() :TaskModel
-//        fun addTaskToDatabase(item:TaskModel)
-//        fun deleteTaskFromDatabase(item:TaskModel)
-//        fun getAllTaskFromDatabase():List<TaskModel>
+        fun addTaskToDatabase(item:TaskModel)
+        fun deleteTaskFromDatabase(item:TaskModel)
+        fun getAllTaskFromDatabase():List<TaskModel>
         fun addTaskToRecyclerViewList(list :ArrayList<TaskModel>)
         fun addTaskToRecyclerView(item:TaskModel)
     }
